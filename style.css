@@ -1,14 +1,33 @@
-/* —— basic reset —— */
+/* Brand colors and type preferences */
+:root {
+  --brand-gold: #e3a535;
+  --brand-black: #000000;
+  --brand-white: #ffffff;
+  --brand-red: #ff003b;
+  --font-body: "Helvetica Now Display W05 Reg", "Helvetica Now Display W05 Lt",
+    Helvetica, Arial, sans-serif;
+  --font-heading: "Halesworth eText Bold", "Halesworth eText Medium", Georgia,
+    serif;
+}
+
+/* Basic reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* —— body + fonts —— */
+/* Page layout */
+html {
+  min-height: 100%;
+  background: var(--brand-white);
+}
+
 body {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  min-height: 100vh;
+  background: var(--brand-white);
+  color: var(--brand-black);
+  font-family: var(--font-body);
   display: flex;
   justify-content: center;
 }
@@ -16,82 +35,120 @@ body {
 .page-wrapper {
   width: 90%;
   max-width: 900px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* header */
+/* Brand header */
 .site-header {
   text-align: center;
-  padding-top: 50px;
+  padding: 38px 0 24px;
+  border-bottom: 3px solid var(--brand-gold);
+}
+
+.brand-logo {
+  display: block;
+  width: min(230px, 70%);
+  height: auto;
+  margin: 0 auto 20px;
 }
 
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-family: var(--font-heading);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-/* chat window */
+/* Chat area */
+main {
+  flex: 1;
+}
+
 .chatbox {
-  margin: 40px 0;
+  margin: 30px 0;
 }
 
 .chat-window {
-  height: 360px;
-  border: 1px solid #000;
-  padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
+  height: min(52vh, 480px);
+  min-height: 280px;
+  border: 1px solid var(--brand-black);
+  border-top: 5px solid var(--brand-gold);
+  padding: 24px;
+  font-size: 17px;
+  line-height: 1.55;
   overflow-y: auto;
-  background: #fafafa;
+  background: var(--brand-white);
   white-space: pre-line;
 }
 
-/* messages */
+/* Messages */
 .msg {
+  width: fit-content;
+  max-width: min(82%, 620px);
   margin-bottom: 14px;
+  padding: 11px 15px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.msg:first-child {
+  border-left: 3px solid var(--brand-gold);
 }
 
 .msg.user {
-  color: #000;
+  margin-left: auto;
+  background: var(--brand-black);
+  color: var(--brand-white);
 }
 
 .msg.ai {
-  color: #666666;
+  background: #f5f5f5;
+  color: var(--brand-black);
 }
 
-/* input row */
+/* Message input */
 .chat-form {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .chat-form input {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  font-size: 18px;
+  min-width: 0;
+  min-height: 52px;
+  padding: 13px 15px;
+  border: 1px solid var(--brand-black);
+  border-radius: 0;
+  font: 16px var(--font-body);
+  color: var(--brand-black);
+  background: var(--brand-white);
+}
+
+.chat-form input::placeholder {
+  color: #555555;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 3px;
 }
 
 .chat-form button {
+  flex: 0 0 52px;
   font-size: 18px;
-  background: #000;
-  color: #fff;
+  background: var(--brand-red);
+  color: var(--brand-white);
   border: none;
-  padding: 12px;
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.2s ease;
 }
 
 .chat-form button .material-icons {
@@ -99,12 +156,17 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: var(--brand-black);
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 3px;
+}
+
+.chat-form button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 /* visually hidden */
@@ -120,12 +182,14 @@ body {
   border: 0;
 }
 
-/* footer */
+/* Footer */
 .site-footer {
-  margin: 60px 0 40px;
+  margin: 24px 0 0;
+  padding: 20px 0 28px;
+  border-top: 1px solid var(--brand-gold);
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: var(--brand-black);
 }
 
 .site-footer nav {
@@ -134,10 +198,35 @@ body {
 
 .site-footer a {
   margin: 0 8px;
-  color: #000;
+  color: var(--brand-black);
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: var(--brand-red);
+}
+
+@media (max-width: 520px) {
+  .page-wrapper {
+    width: calc(100% - 32px);
+  }
+
+  .site-header {
+    padding-top: 26px;
+  }
+
+  .chatbox {
+    margin: 22px 0;
+  }
+
+  .chat-window {
+    height: 55vh;
+    min-height: 250px;
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .msg {
+    max-width: 92%;
+  }
 }
